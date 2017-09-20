@@ -25,3 +25,10 @@
 .picture a {
   display: block;
 }
+
+.popup {
+  border: solid 1px #ccc;
+  display: inline-block;
+  padding: 50px;
+  opacity: 0;
+}
