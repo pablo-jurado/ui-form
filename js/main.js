@@ -11,6 +11,7 @@ var submitBtn = document.getElementById('submit_btn');
 var usernameEl = document.getElementById('username');
 var passwordEl = document.getElementById('password');
 var usernumberEl = document.getElementById('usernumber');
+var geo = document.getElementById('geoglocation');
 var feedback = document.getElementById('feedback');
 
 // main validation event
@@ -84,6 +85,28 @@ function isValidUserNumber (number) {
   }
   return false;
 }
+
+function geoSuccess (pos) {
+  var crd = pos.coords;
+  var lat = crd.latitude;
+  var lng = crd.longitude;
+
+  geo.value = 'Lat:' + lat + ', Lng: ' + lng;
+}
+
+function geoError (err) {
+  console.warn(err);
+  geo.innerHTML = 'Geolocation is not supported.';
+}
+
+function getPosition () {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+  } else {
+    geo.innerHTML = 'Geolocation is not supported.';
+  }
+}
+getPosition();
 
 function validateForm (event) {
   event.preventDefault();
