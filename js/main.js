@@ -196,3 +196,33 @@ document.getElementById('filteredArray').innerHTML = filteredArray;
 // Parse this Flickr JSON feed without using eval() and output a picture and
 // description for the each photo in the feed into a div when
 // the show pictures button is clicked
+
+var script = document.createElement('script');
+var apiURL = 'http://www.flickr.com/services/feeds/photos_public.gne?tags=punctuation,atsign&format=json';
+script.src = apiURL;
+document.getElementsByTagName('head')[0].appendChild(script);
+
+var imagesBtn = document.getElementById('flickrpics');
+var allImages;
+imagesBtn.onclick = renderFlickrPics;
+
+function jsonFlickrFeed (data) {
+  var pictures = data.items.reduce(function (total, item, index, array) {
+    total += '<div class="picture">';
+    total += '<h4>' + item.title + '</h4>';
+    total += '<img src="' + item.media.m + '" />';
+    total += '<a href="' + item.link + '">Link</a>';
+    total += '</div>';
+
+    // this close the div wrapper at the last item
+    if (array.length - 1 === index) total += '</div>';
+
+    return total;
+  }, '<div class="pictures-wrapper">');
+
+  allImages = pictures;
+}
+
+function renderFlickrPics () {
+  document.getElementById('flickr').innerHTML = allImages;
+}
