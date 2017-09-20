@@ -5,7 +5,6 @@
 // Add form / input validation to the registrationform div with Javascript.
 // Please do not use a JavaScript library to do form validation.
 
-// password: must contain at least 2 numbers and be 8 to 15 characters in length
 // usernumber: must be 36 digits and have no non-numeral characters
 // geoglocation: currently no input validation is used as the input validation would be different for US and non-US locations
 
@@ -20,23 +19,46 @@ submitBtn.onclick = validateForm;
 
 // username validation event
 usernameEl.onchange = checkUsername;
+// password validation event
+passwordEl.onchange = checkPassword;
 
 function checkUsername (event) {
   var usernameEl = event.target;
   var username = event.target.value;
 
-  if (!isValidUsername(username)) {
-    usernameEl.classList.add('invalid');
-    feedback.innerHTML = 'Username must contain a lower and upper case letter and at least 1 number (no special characters)';
-  } else {
+  if (isValidUsername(username)) {
     usernameEl.classList.remove('invalid');
     feedback.innerHTML = '';
+  } else {
+    usernameEl.classList.add('invalid');
+    feedback.innerHTML = 'Username must contain a lower and upper case letter and at least 1 number (no special characters)';
   }
 }
 
 // username must contain a lower and upper case letter and at least 1 number. Cannot contain special characters
 function isValidUsername (name) {
   if (hasUpperCase(name) && hasLowerCase(name) && hasNumber(name) && !hasSpecialChar(name)) {
+    return true;
+  }
+  return false;
+}
+
+function checkPassword (event) {
+  var passwordEl = event.target;
+  var password = event.target.value;
+
+  if (isValidPassword(password)) {
+    passwordEl.classList.remove('invalid');
+    feedback.innerHTML = '';
+  } else {
+    passwordEl.classList.add('invalid');
+    feedback.innerHTML = 'password must contain at least 2 numbers and be 8 to 15 characters';
+  }
+}
+
+// password must contain at least 2 numbers and be 8 to 15 characters in length
+function isValidPassword (pass) {
+  if (pass.length >= 8 && pass.length <= 15 && hasTwoNumbers(pass) && !hasWhiteSpace(pass)) {
     return true;
   }
   return false;
@@ -51,6 +73,14 @@ function validateForm (event) {
 
   // TODO: validate
   console.log('validate', username, password, usernumber);
+}
+
+// RegExp
+function hasWhiteSpace (str) {
+  return /\s/.test(str);
+}
+function hasTwoNumbers (str) {
+  return /(.*[0-9]){2}/.test(str);
 }
 
 function hasUpperCase (str) {
