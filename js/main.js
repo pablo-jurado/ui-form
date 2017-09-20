@@ -5,7 +5,6 @@
 // Add form / input validation to the registrationform div with Javascript.
 // Please do not use a JavaScript library to do form validation.
 
-// usernumber: must be 36 digits and have no non-numeral characters
 // geoglocation: currently no input validation is used as the input validation would be different for US and non-US locations
 
 var submitBtn = document.getElementById('submit_btn');
@@ -16,11 +15,12 @@ var feedback = document.getElementById('feedback');
 
 // main validation event
 submitBtn.onclick = validateForm;
-
 // username validation event
 usernameEl.onchange = checkUsername;
 // password validation event
 passwordEl.onchange = checkPassword;
+// usernumber validation event
+usernumberEl.onchange = checkUserNumber;
 
 function checkUsername (event) {
   var usernameEl = event.target;
@@ -31,7 +31,7 @@ function checkUsername (event) {
     feedback.innerHTML = '';
   } else {
     usernameEl.classList.add('invalid');
-    feedback.innerHTML = 'Username must contain a lower and upper case letter and at least 1 number (no special characters)';
+    feedback.innerHTML = 'User Name must contain a lower and upper case letter and at least 1 number (no special characters)';
   }
 }
 
@@ -52,13 +52,34 @@ function checkPassword (event) {
     feedback.innerHTML = '';
   } else {
     passwordEl.classList.add('invalid');
-    feedback.innerHTML = 'password must contain at least 2 numbers and be 8 to 15 characters';
+    feedback.innerHTML = 'Password must contain at least 2 numbers and be 8 to 15 characters';
   }
 }
 
 // password must contain at least 2 numbers and be 8 to 15 characters in length
 function isValidPassword (pass) {
   if (pass.length >= 8 && pass.length <= 15 && hasTwoNumbers(pass) && !hasWhiteSpace(pass)) {
+    return true;
+  }
+  return false;
+}
+
+function checkUserNumber (event) {
+  var usernumberEl = event.target;
+  var usernumber = event.target.value;
+
+  if (isValidUserNumber(usernumber)) {
+    usernumberEl.classList.remove('invalid');
+    feedback.innerHTML = '';
+  } else {
+    usernumberEl.classList.add('invalid');
+    feedback.innerHTML = 'User number must be 36 digits';
+  }
+}
+
+// usernumber must be 36 digits and have no non-numeral characters
+function isValidUserNumber (number) {
+  if (hasOnlyNumbers(number) && number.length === 36) {
     return true;
   }
   return false;
@@ -79,6 +100,7 @@ function validateForm (event) {
 function hasWhiteSpace (str) {
   return /\s/.test(str);
 }
+
 function hasTwoNumbers (str) {
   return /(.*[0-9]){2}/.test(str);
 }
@@ -97,6 +119,10 @@ function hasNumber (str) {
 
 function hasSpecialChar (str) {
   return /[^a-zA-Z0-9]+/.test(str);
+}
+
+function hasOnlyNumbers (str) {
+  return /^\d+$/.test(str);
 }
 
 // -----------------------------------------------------------------------------
