@@ -1,3 +1,34 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+label{
+	width:155px;
+	display:block;
+	float:left;
+	text-align:right;
+	padding:0 15px 0 0;
+}
+ul.nobullet{
+	list-style-type:none;
+}
+li {
+	margin:0 0 15px 0;
+}
+li input {
+	padding:2px;
+	border:solid 1px #7295ba;
+}
+#submit_btn {
+	width:111px;
+	height:33px;
+	border:none;
+	color:#fff;
+	margin:15px 0 0 250px;
+	padding:0;
+	cursor:pointer;
+}
+
 .invalid {
   border: solid 1px red;
 }
