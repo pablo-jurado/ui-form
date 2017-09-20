@@ -181,8 +181,13 @@ getPosition();
 // Remove every third element from the array listed below using
 // Javascript and without creating a new array.
 
+var filteredArray = thisArray.filter(isNotThird).join('');
 
+function isNotThird (item, index) {
+  if ((index + 1) % 3 !== 0) return true;
+}
 
+document.getElementById('filteredArray').innerHTML = filteredArray;
 
 // -----------------------------------------------------------------------------
 //    PART 4
