@@ -1,62 +1,119 @@
 body {
   font-family: 'Roboto', sans-serif;
+  margin: 0;
 }
 
-label{
-	width:155px;
-	display:block;
-	float:left;
-	text-align:right;
-	padding:0 15px 0 0;
+/* -------------------------------------------------------------------------- */
+/*  Part 1  */
+/* -------------------------------------------------------------------------- */
+
+#registrationform {
+  padding-top: 50px;
+  min-height: 100vh;
+  background: #ff9800;
 }
+
+#registrationform h1, #registrationform h2 {
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 5px 10px #bf360c;
+
+}
+
 ul.nobullet{
 	list-style-type:none;
+  padding: 0;
+  margin-top: 60px;
 }
-li {
-	margin:0 0 15px 0;
+
+form {
+  border: solid 1px #ccc;
+  width: 400px;
+  margin: 50px auto;
+  background: #fff;
+  box-shadow: 0 5px 10px #bf360c;
 }
-li input {
-	padding:2px;
-	border:solid 1px #7295ba;
+
+form li {
+  position: relative;
+  width: 300px;
+  margin: 40px auto;
 }
+
+form li:last-child {
+  margin-bottom: 0px;
+}
+
+form li input {
+  width: 300px;
+  border: none;
+  border-bottom: solid 2px #e0e0e0;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+form label {
+  position: absolute;
+  top: 0;
+  left: 3px;
+  color: #757575;
+  transition: 0.2s ease;
+}
+
+form input:focus + label {
+  transform: translate(-12%, -90%) scale(0.80);
+}
+
+form input:valid + label {
+  transform: translate(-12%, -90%) scale(0.80);
+}
+
+form input:focus {
+  border-color: #4caf50;
+}
+
 #submit_btn {
-	width:111px;
+	width: 300px;
 	height:33px;
 	border:none;
-	color:#fff;
-	margin:15px 0 0 250px;
+  border: solid 2px #4caf50;
+  background: #4caf50;
+  color: #fff;
+  font-weight: bold;
 	padding:0;
 	cursor:pointer;
+  display: block;
+  margin: 10px auto 30px;
+  transition: 0.3s ease;
+}
+
+#submit_btn:hover {
+  background: #c5e1a5;
+  border: solid 2px #4caf50;
+  color: #4caf50;
+}
+
+#feedback {
+  font-size: 0.8em;
+  color: #f44336;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+  height: 40px;
 }
 
 .invalid {
-  border: solid 1px red;
+  border-bottom-color: #f44336;
 }
 
 .validated {
-  border: solid 1px green;
+  border-bottom-color: #4caf50;
 }
 
-.pictures-wrapper {
-  max-width: 80%;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
 
-}
-
-.picture {
-  display: inline-block;
-  margin: 5px;
-  padding: 10px 20px;
-  border: solid 1px #ccc;
-}
-
-.picture a {
-  display: block;
-}
-
+/* -------------------------------------------------------------------------- */
+/*  Part 2  */
+/* -------------------------------------------------------------------------- */
 #popupContainer {
   opacity: 0;
 }
@@ -86,4 +143,27 @@ li input {
   left: 0;
   z-index: 1;
   opacity: 0.9;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Part 4  */
+/* -------------------------------------------------------------------------- */
+.pictures-wrapper {
+  max-width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
+
+.picture {
+  display: inline-block;
+  margin: 5px;
+  padding: 10px 20px;
+  border: solid 1px #ccc;
+}
+
+.picture a {
+  display: block;
 }
