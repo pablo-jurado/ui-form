@@ -171,35 +171,43 @@ getPosition();
 // displays the contents of http://www.cpanel.net when the
 // Find out More button is activated.
 
+
+
+// create popup
 YUI().use('transition', function (Y) {
-  var content = "The cPanel & WHM ecosystem spans hundreds of developers, thousands of hosting providers, and millions of domains around the world, powered by a two-pronged web hosting and automation dashboard. cPanel® is not just a tool, it's software that empowers an industry.";
+  var textContent = "The cPanel & WHM ecosystem spans hundreds of developers, thousands of hosting providers, and millions of domains around the world, powered by a two-pronged web hosting and automation dashboard. cPanel® is not just a tool, it's software that empowers an industry.";
+
   // Access DOM nodes.
-  var popup = Y.one('#popup');
+  var container = Y.one('#popupContainer');
 
   // Create DOM nodes.
-  var div = Y.Node.create('<div>');
-  div.append('<button id="close-btn">close</button>');
-  div.append('<p>' + content + '</p>');
-  div.addClass('popup');
+  var popup = Y.Node.create('<div>');
+  popup.append(textContent);
+  popup.addClass('popup');
+  container.append(popup);
 
-  popup.append(div);
+  var popupBack = Y.Node.create('<div>');
+  popupBack.addClass('popup-background');
+  container.append(popupBack);
+
+  container.hide();
 
   Y.one('#findoutmore').on('click', function () {
-    div.show();
-    div.transition({
+    container.show();
+    container.transition({
       duration: 1, // seconds
       easing: 'ease-in',
       opacity: 1
     });
   });
 
-  Y.one('#close-btn').on('click', function () {
-    div.transition({
+  Y.one('.popup-background').on('click', function () {
+    container.transition({
       duration: 1, // seconds
       easing: 'ease-out',
       opacity: 0
     }, function () {
-      div.hide();
+      container.hide();
     });
   });
 });
