@@ -101,9 +101,19 @@ function validateForm (event) {
   var username = document.getElementById('username').value;
   var password = document.getElementById('password').value;
   var usernumber = document.getElementById('usernumber').value;
+  var submit = document.getElementById('submit_btn');
 
-  // TODO: validate
-  console.log('validate', username, password, usernumber);
+  if (isValidUsername(username) && isValidPassword(password) && isValidUserNumber(usernumber)) {
+    // loops all inputs and add validated class
+    var allInputs = document.querySelectorAll('form li input');
+    allInputs.forEach(function (input) {
+      input.classList.add('validated');
+    });
+
+    submit.disabled = true;
+
+    return true;
+  }
 }
 
 function renderFeedback (element, string) {
