@@ -159,9 +159,12 @@ function hasOnlyNumbers (str) {
   return /^\d+$/.test(str);
 }
 
-addButtonsEvents();
-getPosition();
+function initFormValidation () {
+  addButtonsEvents();
+  getPosition();
+}
 
+initFormValidation();
 
 // -----------------------------------------------------------------------------
 //    PART 2
@@ -170,8 +173,6 @@ getPosition();
 // Create a javascript based pop up container using the YUI library that
 // displays the contents of http://www.cpanel.net when the
 // Find out More button is activated.
-
-
 
 // create popup
 YUI().use('transition', function (Y) {
@@ -219,13 +220,13 @@ YUI().use('transition', function (Y) {
 // Remove every third element from the array listed below using
 // Javascript and without creating a new array.
 
-var filteredArray = thisArray.filter(isNotThird).join('');
+var filteredString = thisArray.filter(isNotThird).join('');
 
 function isNotThird (item, index) {
   if ((index + 1) % 3 !== 0) return true;
 }
 
-document.getElementById('filteredArray').innerHTML = filteredArray;
+document.getElementById('filteredArray').innerHTML = filteredString;
 
 // -----------------------------------------------------------------------------
 //    PART 4
@@ -252,7 +253,7 @@ function jsonFlickrFeed (data) {
     total += '<a href="' + item.link + '">Link</a>';
     total += '</div>';
 
-    // this close the div wrapper at the last item
+    // this close the div pictures-wrapper at the last item
     if (array.length - 1 === index) total += '</div>';
 
     return total;
