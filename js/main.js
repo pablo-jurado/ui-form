@@ -110,6 +110,7 @@ function validateForm (event) {
       input.classList.add('validated');
     });
 
+    renderFeedback(null, 'You have successfully registered');
     submit.disabled = true;
 
     return true;
@@ -118,8 +119,7 @@ function validateForm (event) {
 
 function renderFeedback (element, string) {
   var feedback = document.getElementById('feedback');
-
-  element.classList.add('invalid');
+  if (element) element.classList.add('invalid');
   feedback.innerHTML = string;
 }
 
